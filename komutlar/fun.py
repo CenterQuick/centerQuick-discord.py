@@ -36,7 +36,9 @@ hug = [
     'https://media2.giphy.com/media/cNwi7weKS4Hg3Y9Wgu/200.gif',
     'https://i.pinimg.com/originals/c7/d6/40/c7d64069782147c69696d9acd81c6da9.gif',
     'https://i.gifer.com/origin/59/59946f2e3c7dea88076eab7a8728aca1_w200.gif',
-    'https://media1.tenor.com/images/022a19f8ad9260b5045e16289e66c903/tenor.gif?itemid=7484223'
+    'https://media1.tenor.com/images/022a19f8ad9260b5045e16289e66c903/tenor.gif?itemid=7484223',
+    'https://media1.tenor.com/images/b62f047f8ed11b832cb6c0d8ec30687b/tenor.gif?itemid=12668480',
+    'https://tenor.com/view/toilet-bound-hanakokun-anime-anime-hug-gif-16831471'
 ]
 
 tokat = [
@@ -45,7 +47,32 @@ tokat = [
     'https://4.bp.blogspot.com/-WfzGkNhjFIE/Vi-vwoWklXI/AAAAAAAAPCc/HXSnXtEMGs0/w680/kemal_sunal_sener_sen_tokat.gif',
     'https://media0.giphy.com/media/J07H1nnjD6I6i18ouB/200.gif',
     'https://fikircok.net/wp-content/uploads/tokat-atan-alarm.gif',
-    'https://j.gifs.com/y46XdJ.gif'
+    'https://j.gifs.com/y46XdJ.gif',
+    'https://img.wattpad.com/d5e45358b9cddaebeb3228b520f219de7550120e/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f776174747061642d6d656469612d736572766963652f53746f7279496d6167652f577267357a7343383574463349413d3d2d33342e313436633362653666386136666362623336303231343131333538302e676966'
+]
+
+dans = [
+    'https://i.pinimg.com/originals/e0/0f/53/e00f538bef44b55164875182aa09a1d1.gif',
+    'https://media0.giphy.com/media/46fSE32PJncBh2V7sG/source.gif',
+    'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/c972a841-3041-40ba-994a-258fe1e5553e/dd80g6u-95ba0a80-b1ac-4c18-ad3a-bb7baf76fd66.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvYzk3MmE4NDEtMzA0MS00MGJhLTk5NGEtMjU4ZmUxZTU1NTNlXC9kZDgwZzZ1LTk1YmEwYTgwLWIxYWMtNGMxOC1hZDNhLWJiN2JhZjc2ZmQ2Ni5naWYifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.aZ7xwBWRmuxLNuqcJJldkndMdMa21IgqCsfrRsyNcR8',
+    'https://media3.giphy.com/media/f7dofsYKTBzyh6zVEJ/giphy.gif',
+    'https://media4.giphy.com/media/6utFOg5PxXbY8wyyDk/giphy.gif',
+    'https://tenor.com/view/zero-two-dance-gif-19586642',
+    'https://data.whicdn.com/images/207517463/original.gif',
+    'https://media.tenor.com/images/7fa3b39ddac5925af0d81aefeeeb3ad4/tenor.gif'
+]
+
+kiss = [
+    'https://tenor.com/view/couple-kiss-love-hold-passionate-gif-5052769',
+    'https://i.pinimg.com/originals/d3/eb/f6/d3ebf6c72b49166687f89109b746c19f.gif',
+    'https://i.gifer.com/2q5n.gif',
+    'https://i0.wp.com/www.goodmorning-status.com/wp-content/uploads/2020/05/b922a8523eff688ce93a5eef9b903eca.gif?fit=500%2C281&ssl=1',
+    'https://lh3.googleusercontent.com/proxy/seMEM5AZ3wisyxM7mOeDnzKp5uOFIUnfqPRjRCPCTWkIZAGzuxniCI0OqW30KsHkB8duKqxZ7MsHQNlvGqhW4zv7lq3DWnY',
+    'https://img.wattpad.com/e6d77bcf6ba40fbeeded01520f62c246f511aa39/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f776174747061642d6d656469612d736572766963652f53746f7279496d6167652f3763314672437944436e595952673d3d2d3732323130373238322e313539376266626164376339373765323132303432333434353135302e676966',
+    'https://i2.wp.com/nileease.com/wp-content/uploads/2020/07/319c0b6efc3f9e5701d2fcc22460a81e.gif?fit=500%2C500&ssl=1',
+    'https://media0.giphy.com/media/y2Vm8cSRf3Yys/200.gif',
+    'https://tenor.com/view/golden-time-anime-kiss-gif-6155657',
+    'https://i.pinimg.com/originals/c1/e1/98/c1e198a514380ebc2956734024a815c9.gif'
 ]
 
 
@@ -54,7 +81,7 @@ class fun(commands.Cog):
         self.bot = bot
 
 
-    @commands.command()
+    @commands.command(name="yaz")
     async def yaz(self,ctx, *,string):
         await ctx.message.delete()
         await ctx.send(string)
@@ -66,26 +93,35 @@ class fun(commands.Cog):
         em.description = message
         await ctx.send(embed=em)
 
-    @commands.command(aliases=["table", "flip"])
-    async def fırlat(self, ctx):
-        """Throw a table in anger."""
-        await ctx.send("```(╯°□°)╯︵ ┻━┻```")
-
-    @commands.command(name="kedi")
+    @commands.command(name="kedi", aliases=["cat"])
     async def cat(self, ctx):
-        await ctx.send(random.choice(kedi))
+        kedi2 = random.choice(kedi)
 
-    @commands.command(name="köpek")
+        embed = discord.Embed(title="Kedi", description="", color=random.randint(0, 0xFFFFFF))
+        embed.set_image(url=kedi2)
+
+        await ctx.send(embed=embed)
+
+    @commands.command(name="köpek", aliases=["dog"])
     async def dog(self, ctx):
-        await ctx.send(random.choice(köpek))
+        köpek2 = random.choice(köpek)
+
+        embed = discord.Embed(title="Köpek", description="", color=random.randint(0, 0xFFFFFF))
+        embed.set_image(url=köpek2)
+
+        await ctx.send(embed=embed)
 
     @commands.command(name="kahve")
     async def coffee(self, ctx):
-        await ctx.send(random.choice(kahve))
+        kahve2 = random.choice(kahve)
 
-    @commands.command(name="sarıl")
+        embed = discord.Embed(title="Kahve", description="", color=random.randint(0, 0xFFFFFF))
+        embed.set_image(url=kahve2)
+
+        await ctx.send(embed=embed)
+
+    @commands.command(name="sarıl", aliases=["hug"])
     async def hug(self, ctx):
-        pass
         if len(ctx.message.mentions) != 1:
             await ctx.send(f"Lütfen bu şekilde kullanınız: `?sarıl @isim`")
         else:
@@ -99,7 +135,6 @@ class fun(commands.Cog):
 
     @commands.command(name="tokat")
     async def slap(self, ctx):
-        pass
         if len(ctx.message.mentions) != 1:
             await ctx.send(f"Lütfen bu şekilde kullanınız: `?tokat @isim`")
         else:
@@ -110,6 +145,83 @@ class fun(commands.Cog):
             embed.set_image(url=tokat2)
 
             await ctx.send(embed=embed)
+
+    @commands.command(name="dans", aliases=["dance"])
+    async def dance(self, ctx):
+        dans2 = random.choice(dans)
+
+        embed = discord.Embed(title="Dans", description="", color=random.randint(0, 0xFFFFFF))
+        embed.set_image(url=dans2)
+
+        await ctx.send(embed=embed)
+
+    @commands.command(name="öp", aliases=["kiss"])
+    async def kissgif(self, ctx):
+        if len(ctx.message.mentions) != 1:
+            await ctx.send(f"Lütfen bu şekilde kullanınız: `?öp @isim`")
+        else:
+            user = ctx.message.mentions[0]
+
+            kiss2 = random.choice(kiss)
+            embed = discord.Embed(title="", description=f"{user.mention}'a öpüyor.", color=random.randint(0, 0xFFFFFF))
+            embed.set_image(url=kiss2)
+
+            await ctx.send(embed=embed)
+
+    @commands.command(name="aşk", aliases=["aşkölçer", "ship"])
+    async def ölcer(self, ctx, member : discord.Member):
+        if len(ctx.message.mentions) != 1:
+            await ctx.send(f"Lütfen bu şekilde kullanınız: `?aşk @isim`")
+        if ctx.author.id == 721798616200773722:
+            if member.id == 717317491604324383:
+
+                embed = discord.Embed(title="Aşk ölçer", description="", color=random.randint(0, 0xFFFFFF))
+                embed.add_field(name="Sevgi yüzdesi", value="%999...", inline=False)
+                embed.add_field(name="Aşıklar", value=f"{ctx.author.mention} / {member.mention}", inline=False)
+                embed.set_thumbnail(url=ctx.author.avatar_url)
+
+                await ctx.send(embed=embed)
+            else:
+                sayi = random.randint(0, 100)
+            embed = discord.Embed(title="Aşk ölçer", description="", color=random.randint(0, 0xFFFFFF))
+            embed.add_field(name="Sevgi yüzdesi", value=f"%{sayi}", inline=False)
+            embed.add_field(name="Testi yapanlar", value=f"{ctx.author.mention} / {member.mention}", inline=False)
+            embed.set_thumbnail(url=ctx.author.avatar_url)
+
+            await ctx.send(embed=embed)
+
+        if ctx.author.id == 717317491604324383:
+            if member.id == 721798616200773722:
+
+                embed = discord.Embed(title="Aşk ölçer", description="", color=random.randint(0, 0xFFFFFF))
+                embed.add_field(name="Sevgi yüzdesi", value="%999...", inline=False)
+                embed.add_field(name="Aşıklar", value=f"{ctx.author.mention} / {member.mention}", inline=False)
+                embed.set_thumbnail(url=ctx.author.avatar_url)
+
+                await ctx.send(embed=embed)
+            else:
+                sayi = random.randint(0, 100)
+            embed = discord.Embed(title="Aşk ölçer", description="", color=random.randint(0, 0xFFFFFF))
+            embed.add_field(name="Sevgi yüzdesi", value=f"%{sayi}", inline=False)
+            embed.add_field(name="Testi yapanlar", value=f"{ctx.author.mention} / {member.mention}", inline=False)
+            embed.set_thumbnail(url=ctx.author.avatar_url)
+
+            await ctx.send(embed=embed)
+
+        else:
+            if ctx.author.id == 721798616200773722:
+                return
+                
+            sayi = random.randint(0, 100)
+            embed = discord.Embed(title="Aşk ölçer", description="", color=random.randint(0, 0xFFFFFF))
+            embed.add_field(name="Sevgi yüzdesi", value=f"%{sayi}", inline=False)
+            embed.add_field(name="Testi yapanlar", value=f"{ctx.author.mention} / {member.mention}", inline=False)
+            embed.set_thumbnail(url=ctx.author.avatar_url)
+
+            await ctx.send(embed=embed)
+
+    
+
 
 
 def setup(bot):

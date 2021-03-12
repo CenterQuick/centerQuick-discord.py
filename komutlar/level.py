@@ -6,6 +6,10 @@ import json
 import os
 import random
 
+from io import BytesIO
+
+from PIL import Image, ImageDraw, ImageFont, ImageColor
+
 
 class lvlup(commands.Cog):
 
@@ -59,33 +63,180 @@ class lvlup(commands.Cog):
 
 
 
-    @commands.command(name="seviye")
+    @commands.command(name="seviye", aliases=["level", "rank"])
     async def level(self, ctx, member : discord.Member = None):
-        
+
         if not member:
-            user = ctx.message.author
-            with open("./data/users.json", "r") as f:
-                users = json.load(f)
+            if ctx.author.id == 721798616200773722:
+                user = ctx.message.author
+                with open("./data/users.json", "r") as f:
+                    users = json.load(f)
 
-            lvl = users[str(ctx.guild.id)][str(user.id)]['level']
-            exp = users[str(ctx.guild.id)][str(user.id)]['txp']
+                lvl = users[str(ctx.guild.id)][str(user.id)]['level']
+                exp = users[str(ctx.guild.id)][str(user.id)]['txp']
 
-            embed = discord.Embed(title = 'Level {}'.format(lvl), description = f"{exp} XP ", color=random.randint(0, 0xFFFFFF))
-            embed.set_author(name = ctx.author, icon_url = ctx.author.avatar_url)
+                img = Image.open("cqthyphon.png").convert('RGB')
+                draw = ImageDraw.Draw(img)
+                font = ImageFont.truetype("Exo2-Black.ttf", 33)
 
-            await ctx.send(embed = embed)
+                asset = ctx.author.avatar_url_as(size=128)
+                dta = BytesIO(await asset.read())
+                pf = Image.open(dta).convert('RGB')
+
+                draw.text((197, 50), f"{user.name}", (20, 255, 200), font=font)
+                draw.text((190, 150), "Level : " + lvl, (20, 255, 200), font=font)
+                draw.text((190, 200), "Experience : " + exp, (20, 255, 200), font=font)
+        
+                pf.copy()
+                pf.putalpha(128)
+
+                img.paste(pf, (25, 55))
+
+                img.save('member.png')
+                await ctx.send(file = discord.File("member.png"))
+
+            if ctx.author.id == 717317491604324383:
+                user = ctx.message.author
+                with open("./data/users.json", "r") as f:
+                    users = json.load(f)
+
+                lvl = users[str(ctx.guild.id)][str(user.id)]['level']
+                exp = users[str(ctx.guild.id)][str(user.id)]['txp']
+
+                img = Image.open("cqepic.png").convert('RGB')
+                draw = ImageDraw.Draw(img)
+                font = ImageFont.truetype("Exo2-Black.ttf", 33)
+
+                asset = ctx.author.avatar_url_as(size=128)
+                dta = BytesIO(await asset.read())
+                pf = Image.open(dta).convert('RGB')
+
+                draw.text((197, 50), f"{user.name}", (255, 255, 255), font=font)
+                draw.text((190, 150), "Level : " + lvl, (255, 255, 255), font=font)
+                draw.text((190, 200), "Experience : " + exp, (255, 255, 255), font=font)
+        
+                pf.copy()
+                pf.putalpha(128)
+
+                img.paste(pf, (25, 55))
+
+                img.save('member.png')
+                await ctx.send(file = discord.File("member.png"))
+                
+            else:
+                if ctx.author.id == 721798616200773722:
+                    return
+                if ctx.author.id == 717317491604324383:
+                    return
+                    
+                user = ctx.message.author
+                with open("./data/users.json", "r") as f:
+                    users = json.load(f)
+
+                lvl = users[str(ctx.guild.id)][str(user.id)]['level']
+                exp = users[str(ctx.guild.id)][str(user.id)]['txp']
+
+                img = Image.open("cqmember.png").convert('RGBA')
+                draw = ImageDraw.Draw(img)
+                font = ImageFont.truetype("Exo2-Black.ttf", 33)
+
+                asset = ctx.author.avatar_url_as(size=128)
+                dta = BytesIO(await asset.read())
+                pf = Image.open(dta).convert('RGBA')
+
+                draw.text((197, 50), f"{user.name}", (20, 255, 70), font=font)
+                draw.text((190, 150), "Level : " + lvl, (20, 255, 70), font=font)
+                draw.text((190, 200), "Experience : " + exp, (20, 255, 70), font=font)
+        
+                pf.copy()
+                pf.putalpha(128)
+
+                img.paste(pf, (25, 55))
+
+                img.save('member.png')
+                await ctx.send(file = discord.File("member.png"))
 
         else:
-            with open("./data/users.json", "r") as f:
-                users = json.load(f)
+            if member.id == 721798616200773722:
+                with open("./data/users.json", "r") as f:
+                    users = json.load(f)
 
-            lvl = users[str(ctx.guild.id)][str(member.id)]['level']
-            exp = users[str(ctx.guild.id)][str(member.id)]['txp']
+                lvl = users[str(ctx.guild.id)][str(member.id)]['level']
+                exp = users[str(ctx.guild.id)][str(member.id)]['txp']
 
-            embed = discord.Embed(title = 'Level {}'.format(lvl), description = f"{exp} XP", color=random.randint(0, 0xFFFFFF))
-            embed.set_author(name = member, icon_url = member.avatar_url)
+                img = Image.open("cqthyphon.png").convert('RGB')
+                draw = ImageDraw.Draw(img)
+                font = ImageFont.truetype("Exo2-Black.ttf", 33)
 
-            await ctx.send(embed = embed)
+                asset = member.avatar_url_as(size=128)
+                dta = BytesIO(await asset.read())
+                pf = Image.open(dta).convert('RGB')
+
+                draw.text((197, 50), f"{member.name}", (20, 255, 200), font=font)
+                draw.text((190, 150), "Level : " + lvl, (20, 255, 200), font=font)
+                draw.text((190, 200), "Experience : " + exp, (20, 255, 200), font=font)
+        
+                pf.copy()
+                pf.putalpha(128)
+
+                img.paste(pf, (25, 55))
+
+                img.save('member.png')
+                await ctx.send(file = discord.File("member.png"))
+
+            if member.id == 717317491604324383:
+                with open("./data/users.json", "r") as f:
+                    users = json.load(f)
+
+                lvl = users[str(ctx.guild.id)][str(member.id)]['level']
+                exp = users[str(ctx.guild.id)][str(member.id)]['txp']
+
+                img = Image.open("cqepic.png").convert('RGB')
+                draw = ImageDraw.Draw(img)
+                font = ImageFont.truetype("Exo2-Black.ttf", 33)
+
+                asset = member.avatar_url_as(size=128)
+                dta = BytesIO(await asset.read())
+                pf = Image.open(dta).convert('RGB')
+
+                draw.text((197, 50), f"{member.name}", (255, 255, 255), font=font)
+                draw.text((190, 150), "Level : " + lvl, (255, 255, 255), font=font)
+                draw.text((190, 200), "Experience : " + exp, (255, 255, 255), font=font)
+        
+                pf.copy()
+                pf.putalpha(128)
+
+                img.paste(pf, (25, 55))
+
+                img.save('member.png')
+                await ctx.send(file = discord.File("member.png"))                
+
+            else:
+                with open("./data/users.json", "r") as f:
+                    users = json.load(f)
+
+                lvl = users[str(ctx.guild.id)][str(member.id)]['level']
+                exp = users[str(ctx.guild.id)][str(member.id)]['txp']
+
+                img = Image.open("cqmember.png").convert('RGBA')
+                draw = ImageDraw.Draw(img)
+                font = ImageFont.truetype("Exo2-Black.ttf", 33)
+
+                asset = member.avatar_url_as(size=128)
+                dta = BytesIO(await asset.read())
+                pf = Image.open(dta).convert('RGBA')
+
+                draw.text((197, 50), f"{member.name}", (20, 255, 70), font=font)
+                draw.text((190, 150), "Level : " + lvl, (20, 255, 70), font=font)
+                draw.text((190, 200), "Experience : " + exp, (20, 255, 70), font=font)
+        
+                pf.copy()
+                pf.putalpha(128)
+
+                img.paste(pf, (25, 55))
+
+                img.save('member.png')
+                await ctx.send(file = discord.File("member.png"))
 
 
 

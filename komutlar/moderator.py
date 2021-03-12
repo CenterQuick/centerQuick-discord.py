@@ -13,56 +13,43 @@ intents = discord.Intents(messages=True, guilds=True)
 
 class ModeratorCommands(commands.Cog):
 
-    async def cog_check(self, ctx):
-        moderator = get(ctx.guild.roles, name="Staff")
-        return (moderator in ctx.author.roles) or (ctx.author.id == ctx.guild.owner_id)
-
     # Kick Command
     @commands.command(name="kick")
     @commands.has_permissions(kick_members = True)
     async def kick(self, ctx, member : discord.Member, *, reason = "Sebep belirtilmedi!"):
         await member.kick(reason = reason)
-        await ctx.send("**Kullanıcı atıldı**")
+        
+        embed = discord.Embed(title="CenterQuickBot", description="", colour=random.randint(0, 0xFFFFFF))
+        embed.add_field(name="Kullanıcı Atıldı", value=f"{member}' İsimli kullanıcı **Atıldı**", inline=False)
+        embed.add_field(name="Atılma Sebebi", value=reason)
+
+        await ctx.send(embed=embed)
 
     # Ban Command
     @commands.command(name="ban")
     @commands.has_permissions(ban_members = True)
     async def ban(self, ctx, member : discord.Member, *, reason = "Sebep belirtilmedi!"):
-        await member.ban(reason = reason)
-        await ctx.send("**Kullanıcı yasaklandı**")
+            await member.ban(reason = reason)
+
+            embed = discord.Embed(title="CenterQuickBot", description="", colour=random.randint(0, 0xFFFFFF))
+            embed.add_field(name="Kullanıcı Banlandı", value=f"{member}' İsimli kullanıcı **Banlandı**", inline=False)
+            embed.add_field(name="Banlanma Sebebi", value=reason)
+
+            await ctx.send(embed=embed)
 
     # Clear Chat Command
-    @commands.command(name="temizle")
+    @commands.command(name="temizle", aliases=["clear", "sil"])
+    @commands.has_permissions(manage_messages = True)
     async def clearMessages(self, ctx, arg):
         deleted = await ctx.channel.purge(limit=int(arg))
 
-        msg = await ctx.send(f"||{len(deleted)}|| **Mesajları sildim. Çok kirletme**!")
+        msg = await ctx.send(f"`{len(deleted)}` **Mesajları sildim. Çok kirletme**!")
         await asyncio.sleep(3)
         await msg.delete()
 
-    # Dm Command
-    @commands.command(name="dm", pass_context = True)
-    async def dm(self, ctx, member : discord.Member, *, message):
-        await member.send(f'{message}')
-        await ctx.send('**Mesaj Gönderme Başarılı!**')
-
-    @commands.command(name="duyuru", pass_context = True)
-    async def dm_all(self, ctx, *, message):
-        if message != None:
-            for member in ctx.guild.members:
-                try:
-                    await member.send(message)
-                    await ctx.channel.send("'" + message + "' Sent to: " + member.name)
-                
-                except:
-                    await ctx.channel.send(" Gönderilemedi '" + "**" + message + "**")
-
-        else:
-            await ctx.channel.send("Bu komutu kullanamazsın!")
-
-
     # Slowmode Command
     @commands.command(name="yavaşla")
+    @commands.has_permissions(manage_messages = True)
     async def setSlowmode(self, ctx, delay):
         if delay == "off":
             delay = 0
@@ -71,26 +58,15 @@ class ModeratorCommands(commands.Cog):
 
     # Mute Command
     @commands.command(name="mute")
-    async def mute(self, ctx, member: discord.Member, seconds=None):
+    @commands.has_permissions(kick_members = True)
+    async def mute(self, ctx, member: discord.Member):
         try:
             if ctx.message.author.guild_permissions.kick_members:
-                if seconds is None or int(seconds) < 0:
-                    
-                    await ctx.send("Süreyi Saniye olarak sayı ile belirtiniz.")
-                    return
-                else:
-                    if member.guild_permissions.manage_messages:
-                        await ctx.send(f"{member} Kullanıcıyı susturamazsınız. **Yetkiniz yok.**")
-                        return
 
-                    muted_role = discord.utils.get(ctx.guild.roles, name="Muted")
-                    await member.add_roles(muted_role)
-                    await ctx.send(f"{member} İsimli kullanıcı `{seconds}` saniye susturuldu!")
-                    muted = discord.utils.get(member.roles, name=muted_role)
-                    if muted is not None:
-                        await asyncio.sleep(int(seconds))
-                        await member.add_roles(muted_role)
-                        await ctx.send(f"{member} İsimli kullanıcı başarı ile susturuldu!")
+                muted_role = discord.utils.get(ctx.guild.roles, name="Muted")
+                await member.add_roles(muted_role)
+                await ctx.send(f"{member} İsimli kullanıcı susturuldu!")
+
             else:
                 await ctx.send("Pardon. Yetkili misin? Ne yapmaya çalışıyorsun!")
         except:
@@ -98,6 +74,7 @@ class ModeratorCommands(commands.Cog):
 
     # unmute command
     @commands.command(name="unmute")
+    @commands.has_permissions(kick_members = True)
     async def unmute(self, ctx, member : discord.Member):
         try:
             if ctx.message.author.guild_permissions.kick_members:
@@ -115,6 +92,8 @@ class ModeratorCommands(commands.Cog):
             await ctx.message.delete()
         except:
             await ctx.send("Sanırım bu komutu kullanamazsın")
+    
+
 
 
 def setup(bot):

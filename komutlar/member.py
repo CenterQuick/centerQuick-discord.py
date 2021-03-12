@@ -17,33 +17,38 @@ l1 = [
 
 
 class MemberCommands(commands.Cog):
-    @commands.command(name="yardım")
+    @commands.command(name="yardım", aliases=["help", "h", "H"])
     async def help(self, ctx):
-        embed = discord.Embed(title='CenterQuickBot Help.', description="", color = 0xf6d025)
-        embed.add_field(name="Üye komutları", value = "`avatar`,`profil`,`sunucu`,`yaz`,`yazdır`,`fırlat`", inline=False)
-        embed.add_field(name="Moderation Module", value="`kick`,`ban`,`dm`,`temizle`,`yavaşla`,`mute`,`unmute`", inline=False)
-        embed.add_field(name="Oyunlar", value="`tahmin`,`slot`,`yazıtura`")
-        embed.add_field(name="Gif komutları", value="`kedi`,`köpek`,`kahve`,`sarıl`,`tokat`")
+        embed = discord.Embed(title='CenterQuickBot Help.', description="", color = 0xfffcfc)
+        embed.add_field(name="Üye komutları", value = "`avatar` | `profil` | `sunucu`\n`yaz` | `yazdır` | `uyarılar`", inline=False)
+        embed.add_field(name="Moderation Module", value="`kick` | `ban` | `dm`\n`duyuru` | `temizle` | `yavaşla`\n`mute` | `unmute` | `uyar`", inline=False)
+        embed.add_field(name="Oyunlar", value="`duello` | `tahmin` | `sor`\n`çevir` | `yazıtura`\n`dilek`", inline=False)
+        embed.add_field(name="Eğlence komutları", value="`sarıl` | `tokat` | `dans`\n`öp` | `aşk` | `kedi`\n`köpek` | `kahve`", inline=False)
+        embed.add_field(name="Ekonomi", value="`cüzdanoluştur` | `cüzdan`", inline=False)
+        embed.add_field(name="Bot", value="`botbilgi` | `davet`", inline=False)
         embed.add_field(name="**Prefix**", value="**?**")
-        embed.add_field(name="Botu Yapan", value="***@! ` [CQN]~र~#0013***")
+        embed.add_field(name="Botu Yapan", value="<@721798616200773722>")
         embed.set_thumbnail(url=ctx.guild.icon_url)
     
         await ctx.send(embed=embed)
 
 
-    @commands.command(name="avatar")
+    @commands.command(name="avatar", aliases=["a"])
     async def sendUserAvatar(self, ctx):
         if len(ctx.message.mentions) != 1:
-            await ctx.send(f"Lütfen bu şekilde kullanınız: `?avatar @isim`")
+            embed = discord.Embed(description=f"{ctx.author.mention}'nın avatarı", color=ctx.author.colour)
+            embed.set_image(url=ctx.author.avatar_url)
+
+            await ctx.send(embed=embed)
         else:
             user = ctx.message.mentions[0]
             
-            embed = discord.Embed(description=f"{user.mention}'nın avatarı", color=0x2F3136)
+            embed = discord.Embed(description=f"{user.mention}'nın avatarı", color=ctx.author.colour)
             embed.set_image(url=user.avatar_url)
 
             await ctx.send(embed=embed)
 
-    @commands.command(name="profil")
+    @commands.command(name="profil", aliases=["p"])
     async def sendMemberInfo(self, ctx):
         if len(ctx.message.mentions) != 1:
             await ctx.send("Lütfen bu şekilde kullanınız: `?profil @isim`")
@@ -79,10 +84,8 @@ class MemberCommands(commands.Cog):
 
             await ctx.send(embed=embed)
 
-    @commands.command(name="sunucu")
+    @commands.command(name="sunucu", aliases=["server", "s"])
     async def sendServerInfo(self, ctx):
-        l2 = random.choice(l1)
-
         embed = discord.Embed(
             title="Sunucu Bilgisi",
             description=f"Kurucu <@{ctx.guild.owner_id}>",
@@ -111,23 +114,22 @@ class MemberCommands(commands.Cog):
                 dnd += 1
 
         embed.add_field(
-            name=f"__**{ctx.guild.member_count}** Members__",
+            name=f"__**{ctx.guild.member_count}** Üyeler__",
             value=f":green_circle: **{online}** Online\n:orange_circle: **{idle}** Idle\n:red_circle: **{dnd}** Busy\n:white_circle: **{offline}** Offline\n:robot: **{bot}** Bot",
             inline=False
         )
         embed.add_field(
-            name=f"__**{len(ctx.guild.channels)-len(ctx.guild.categories)}** Channels__",
-            value=f"Text: **{len(ctx.guild.text_channels)}**\nVoice: **{len(ctx.guild.voice_channels)}**\nCategories: **{len(ctx.guild.categories)}**",
+            name=f"__**{len(ctx.guild.channels)-len(ctx.guild.categories)}** Kanallar__",
+            value=f"Text: **{len(ctx.guild.text_channels)}**\nVoice: **{len(ctx.guild.voice_channels)}**\nKategoriler: **{len(ctx.guild.categories)}**",
             inline=False
         )
 
         date = ctx.guild.created_at
         embed.add_field(
-            name="__Creation Date__",
+            name="__Oluşturma Tarihi__",
             value=f"{date.day}/{date.month}/{date.year}  {date.hour}:{date.minute}",
             inline=False
         )
-        embed.set_image(url=l2)
 
         await ctx.send(embed=embed)
 

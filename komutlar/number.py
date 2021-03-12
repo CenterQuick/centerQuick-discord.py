@@ -7,7 +7,7 @@ sayı = ('0','1','2','3','4','5','6','7','8','9')
 
 class randomnumber(commands.Cog):
     @commands.command(name="tahmin")
-    async def number(self, ctx, message):
+    async def number(self, ctx):
         number = random.randint(0, 9)
         for i in range(0, 5):
             await ctx.send('Tekrar')
@@ -19,6 +19,7 @@ class randomnumber(commands.Cog):
                 await ctx.send('Küçük tahmin')
             else:
                 await ctx.send('**Tebrikler Bildin!!!**')
+                break
 
 
 
